@@ -27,9 +27,7 @@ export class PlaywrightDevPage {
   async registrar() {
       var clientes ={1:['Gild109','Gilgamesh','Istubar','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
       2:['dante214','Dante','Alighieri ','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
-      3:['Sigfried23','Siegfried','Sigurðr','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'], 
-      4:['INDEF','LT','Omega','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
-      5:['Sauron87','Sauron','Olivera','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n']};
+      3:['Sigfried23','Siegfried','Sigurðr','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n']};
         await this.goto();
         var mensaje:string;
         for (var x in clientes){

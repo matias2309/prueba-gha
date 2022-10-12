@@ -25,9 +25,9 @@ export class PlaywrightDevPage {
     await this.page.goto('https://buggy.justtestit.org/register');
   }
   async registrar() {
-      var clientes ={1:['Gild109','Gilgamesh','Istubar','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
-      2:['dante214','Dante','Alighieri ','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
-      3:['Sigfried23','Siegfried','Sigurðr','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n']};
+      var clientes ={1:['hola12sf','aros','uytb','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
+      2:['trebvs','12sfa','qwscvb ','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
+      3:['alnevre','asfasfxc','098jgcv','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n']};
         await this.goto();
         var mensaje:string;
         for (var x in clientes){

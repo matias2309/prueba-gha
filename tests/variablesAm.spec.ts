@@ -1,6 +1,26 @@
 
 import test, { expect, Locator, Page } from '@playwright/test';
-
+const clientes = [{
+  usuario: "lucas1234s", 
+  nombre: "lucas",
+  apellido: "vergara",
+  contra: "1234man@#",
+  confirContra: "1234man@#"
+},
+{
+  usuario: "marquisio98", 
+  nombre: "marcos",
+  apellido: "caceres",
+  contra: "1234man@#AS",
+  confirContra: "1234man@#AS"
+},
+{
+  usuario: "hola12sf", 
+  nombre: "aros",
+  apellido: "uytb",
+  contra: "aosdk@alksd.com",
+  confirContra: "aosdk@alksd.com",
+}];
 export class PlaywrightDevPage {
   readonly page: Page;
   readonly usuarioT: Locator;
@@ -10,6 +30,7 @@ export class PlaywrightDevPage {
   readonly confiClave: Locator;
   readonly guardar: Locator;
   readonly creado: Locator;
+  
   
   constructor(page: Page) {
     this.page = page;
@@ -25,42 +46,40 @@ export class PlaywrightDevPage {
     await this.page.goto('https://buggy.justtestit.org/register');
   }
   async registrar() {
-      var clientes ={1:['hola12sf','aros','uytb','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
-      2:['trebvs','12sfa','qwscvb ','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n'],
-      3:['alnevre','asfasfxc','098jgcv','M5Au84Cx4SZtW@n','M5Au84Cx4SZtW@n']};
+      
         await this.goto();
-        var mensaje:string;
+        let mensaje:string;
         for (var x in clientes){
-          for(var i=0; i<clientes[x].length; i++){
-            await this.usuarioT.click();
-            await this.usuarioT.fill(clientes[x][i]);
-            
+          await this.usuarioT.click();
+          await this.usuarioT.fill(clientes[x].usuario);
           
-            await this.nombre.click();
-            await this.nombre.fill(clientes[x][i+1]);
-                
+        
+          await this.nombre.click();
+          await this.nombre.fill(clientes[x].nombre);
               
-            await this.apellido.click();
-            await this.apellido.fill(clientes[x][i+2]);
-               
-              
-            await this.clave.click();
-            await this.clave.fill(clientes[x][i+3]);
-                
-              
-            await this.confiClave.click();
-            await this.confiClave.fill(clientes[x][i+4]);
             
-            await this.guardar.click();
-            mensaje=await this.creado.innerText();
-            if( mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have lowercase characters'){
-              await this.page.screenshot({ path: clientes[x]+'.png'});
-            }else if(mensaje == 'UsernameExistsException: User already exists'){
-              await this.page.screenshot({ path: clientes[x]+'.png'});
-            }else if(mensaje == 'Registration is successful'){
-              await this.page.screenshot({ path: clientes[x]+'.png'});
-            }
+          await this.apellido.click();
+          await this.apellido.fill(clientes[x].apellido);
+              
+            
+          await this.clave.click();
+          await this.clave.fill(clientes[x].contra);
+              
+            
+          await this.confiClave.click();
+          await this.confiClave.fill(clientes[x].confirContra);
+          
+          await this.guardar.click();
+          mensaje=await this.creado.innerText();
+          if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have symbol characters'){
+            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+          }else if(mensaje == 'UsernameExistsException: User already exists'){
+            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+          }else if(mensaje == 'Registration is successful'){
+            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+          }else if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have uppercase characters'){
+            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+          }
           }
         }  
-  }
 }

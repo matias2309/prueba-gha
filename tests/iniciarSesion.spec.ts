@@ -10,12 +10,12 @@ export class iniciarUsuarios{
     readonly cerrar: Locator;
     constructor(page: Page) {
         this.page = page;
-        this.usuarioT = page.locator('//input[contains(@name,"login")]');
-        this.clave =  page.locator('//input[contains(@name,"password")]');
-        this.ingresar =  page.locator('//button[@class="btn btn-success"]');
-        this.validacion = page.locator('//span[@class="label label-warning"]');
+        this.usuarioT = page.locator('[placeholder="Login"]');
+        this.clave =  page.locator('text=Login Register >> input[name="password"]');
+        this.ingresar =  page.locator('button:has-text("Login")');
+        this.validacion = page.locator('text=Invalid username/password');
         this.nombreUsuario = page.locator('//span[@class="nav-link disabled"]');
-        this.cerrar=  page.locator('//a[@class="nav-link"][contains(.,"Logout")]');
+        this.cerrar=  page.locator('text=Logout');
       }
       async iniciarSesion(page) {
         const variables = new PlaywrightDevPage(page);

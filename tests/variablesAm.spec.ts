@@ -1,26 +1,6 @@
 
 import test, { expect, Locator, Page } from '@playwright/test';
-const clientes = [{
-  usuario: "lucas1234s", 
-  nombre: "lucas",
-  apellido: "vergara",
-  contra: "1234man@#",
-  confirContra: "1234man@#"
-},
-{
-  usuario: "marquisio98", 
-  nombre: "marcos",
-  apellido: "caceres",
-  contra: "1234man@#AS",
-  confirContra: "1234man@#AS"
-},
-{
-  usuario: "hola12sf", 
-  nombre: "aros",
-  apellido: "uytb",
-  contra: "aosdk@alksd.com",
-  confirContra: "aosdk@alksd.com",
-}];
+
 export class PlaywrightDevPage {
   readonly page: Page;
   readonly usuarioT: Locator;
@@ -30,7 +10,27 @@ export class PlaywrightDevPage {
   readonly confiClave: Locator;
   readonly guardar: Locator;
   readonly creado: Locator;
-  
+  readonly clientes = [{
+    usuario: "lucas1234s", 
+    nombre: "lucas",
+    apellido: "vergara",
+    contra: "1234man@#",
+    confirContra: "1234man@#"
+  },
+  {
+    usuario: "marquisio98", 
+    nombre: "marcos",
+    apellido: "caceres",
+    contra: "1234man@#AS",
+    confirContra: "1234man@#AS"
+  },
+  {
+    usuario: "hola12sf", 
+    nombre: "aros",
+    apellido: "uytb",
+    contra: "aosdk@alksd.com",
+    confirContra: "aosdk@alksd.com",
+  }];
   
   constructor(page: Page) {
     this.page = page;
@@ -49,37 +49,38 @@ export class PlaywrightDevPage {
       
         await this.goto();
         let mensaje:string;
-        for (var x in clientes){
+        for (var x in this.clientes){
           await this.usuarioT.click();
-          await this.usuarioT.fill(clientes[x].usuario);
+          await this.usuarioT.fill(this.clientes[x].usuario);
           
         
           await this.nombre.click();
-          await this.nombre.fill(clientes[x].nombre);
+          await this.nombre.fill(this.clientes[x].nombre);
               
             
           await this.apellido.click();
-          await this.apellido.fill(clientes[x].apellido);
+          await this.apellido.fill(this.clientes[x].apellido);
               
             
           await this.clave.click();
-          await this.clave.fill(clientes[x].contra);
+          await this.clave.fill(this.clientes[x].contra);
               
             
           await this.confiClave.click();
-          await this.confiClave.fill(clientes[x].confirContra);
+          await this.confiClave.fill(this.clientes[x].confirContra);
           
           await this.guardar.click();
           mensaje=await this.creado.innerText();
           if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have symbol characters'){
-            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
           }else if(mensaje == 'UsernameExistsException: User already exists'){
-            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
           }else if(mensaje == 'Registration is successful'){
-            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
           }else if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have uppercase characters'){
-            await this.page.screenshot({ path: clientes[x].nombre+'.png'});
+            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
           }
           }
-        }  
+        }
+         
 }

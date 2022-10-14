@@ -11,25 +11,25 @@ export class PlaywrightDevPage {
   readonly guardar: Locator;
   readonly creado: Locator;
   readonly clientes = [{
-    usuario: "lucas1234s", 
-    nombre: "lucas",
-    apellido: "vergara",
-    contra: "1234man@#",
-    confirContra: "1234man@#"
+    usuario: "BcaceresZalazar", 
+    nombre: "basti",
+    apellido: "Caceres",
+    contra: "a1234mMn@#A",
+    confirContra: "a1234mMn@#A"
   },
   {
-    usuario: "marquisio98", 
-    nombre: "marcos",
+    usuario: "KittyBenvenuto", 
+    nombre: "Kitty",
     apellido: "caceres",
-    contra: "1234man@#AS",
-    confirContra: "1234man@#AS"
+    contra: "a1234mMn@#A",
+    confirContra: "a1234mMn@#A"
   },
   {
-    usuario: "hola12sf", 
-    nombre: "aros",
-    apellido: "uytb",
-    contra: "aosdk@alksd.com",
-    confirContra: "aosdk@alksd.com",
+    usuario: "ReneMoralesBenvenuto", 
+    nombre: "Rene",
+    apellido: "Morales",
+    contra: "a1234Man@#A",
+    confirContra: "a1234Man@#A",
   }];
   
   constructor(page: Page) {
@@ -70,17 +70,18 @@ export class PlaywrightDevPage {
           await this.confiClave.fill(this.clientes[x].confirContra);
           
           await this.guardar.click();
-          mensaje=await this.creado.innerText();
-          if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have symbol characters'){
-            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
+          mensaje=await (await this.creado.innerText()).toString();
+          if(mensaje == 'Registration is successful'){
+            await this.page.screenshot({ path: 'Usuario registrado '+this.clientes[x].nombre+'.png'});
           }else if(mensaje == 'UsernameExistsException: User already exists'){
-            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
-          }else if(mensaje == 'Registration is successful'){
-            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
+            await this.page.screenshot({ path: 'Usuario ya existente '+this.clientes[x].nombre+'.png'});
+          }else if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have symbol characters'){
+            await this.page.screenshot({ path: 'contraseña no cumple con las politica '+this.clientes[x].nombre+'.png'});
           }else if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have uppercase characters'){
-            await this.page.screenshot({ path: this.clientes[x].nombre+'.png'});
+            await this.page.screenshot({ path: 'contraseña incorrecta '+this.clientes[x].nombre+'.png'});
           }
           }
+          
         }
          
 }

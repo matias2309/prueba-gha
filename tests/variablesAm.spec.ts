@@ -10,6 +10,7 @@ export class PlaywrightDevPage {
   readonly confiClave: Locator;
   readonly guardar: Locator;
   readonly creado: Locator;
+  
   readonly clientes = [{
     usuario: "BcaceresZalazar", 
     nombre: "basti",
@@ -28,8 +29,8 @@ export class PlaywrightDevPage {
     usuario: "ReneMoralesBenvenuto", 
     nombre: "Rene",
     apellido: "Morales",
-    contra: "a1234Man@#A",
-    confirContra: "a1234Man@#A",
+    contra: "a1234mMn@#AS",
+    confirContra: "a1234mMn@#AS",
   }];
   
   constructor(page: Page) {
@@ -41,6 +42,7 @@ export class PlaywrightDevPage {
     this.confiClave =  page.locator('input[name="confirmPassword"]');
     this.guardar =  page.locator('button:has-text("Register")');
     this.creado =  page.locator('[class="result alert alert-danger"]');
+    
   }
   async goto() {
     await this.page.goto('https://buggy.justtestit.org/register');
@@ -83,5 +85,15 @@ export class PlaywrightDevPage {
           }
           
         }
+        async visible() {
+          let span = this.page.isVisible('//span[@class="label label-warning"]');
+          if(await span ==true) {
+            return true;
+          }else if(await span==false){
+            return false;
+          }
+          
+      }
+      
          
 }

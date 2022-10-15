@@ -22,8 +22,8 @@ export class iniciarUsuarios{
         const variables = new PlaywrightDevPage(page);
         await this.goto();
         let nombreDelUsu:Locator;
-        let valida:Locator;
-        valida= await this.page.locator('//span[@class="label label-warning"]');
+        
+       
         for(var i in variables.clientes){
             await this.usuarioT.click();
             await this.usuarioT.fill(variables.clientes[i].usuario);
@@ -31,15 +31,18 @@ export class iniciarUsuarios{
             await this.clave.click();
             await this.clave.fill(variables.clientes[i].contra);
             await this.ingresar.click();
-            
-            if(await valida.isHidden()){//en este momento esta oculto
-                await this.page.screenshot({ path:variables.clientes[i].nombre+' Novalidar.png'});
-                await this.cerrar.click();
-            }else if(await valida.isVisible()) {
+
+
+            console.log(await this.page.isVisible('//span[@class="label label-warning"]'));
+            /*if(await this.page.isVisible('//span[@class="label label-warning"]')) {
                 await this.page.screenshot({ path:variables.clientes[i].nombre+' validar.png'});
-                console.log(await valida.innerText());
-            }
-            
+                console.log("Encontrado");
+            }else{
+                await this.page.screenshot({ path:variables.clientes[i].nombre+' No validar.png'});
+                await this.cerrar.click();
+                console.log("No encontrado");
+            }*/
+            //<span _ngcontent-blg-2="" class="label label-warning">Invalid username/password</span>
             
             
             //await this.page.screenshot({ path:variables.clientes[i].nombre+' validar.png'});

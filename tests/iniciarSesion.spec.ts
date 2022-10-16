@@ -36,7 +36,6 @@ export class iniciarUsuarios{
                 await expect(this.page.locator('//span[contains(@class,"nav-link disabled")]')).toContainText(variables.clientes[i].nombre);
                 await this.page.screenshot({ path:'Nombre del usuario es '+variables.clientes[i].nombre+'.png'});
                 await this.cerrar.click();
-                console.log("no validado");
 
             }catch (e) {
                 await expect(this.page.locator('//span[@class="label label-warning"]')).toContainText("Invalid username/password");

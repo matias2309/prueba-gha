@@ -22,8 +22,8 @@ export class PlaywrightDevPage {
     usuario: "KittyBenvenuto", 
     nombre: "Kitty",
     apellido: "caceres",
-    contra: "a1234mMn@#AS",
-    confirContra: "a1234mMn@#AS"
+    contra: "a1234mMn@#A",
+    confirContra: "a1234mMn@#A"
   },
   {
     usuario: "ReneMoralesBenvenuto", 
@@ -85,15 +85,7 @@ export class PlaywrightDevPage {
           }
           
         }
-        async visible() {
-          let span = this.page.isVisible('//span[@class="label label-warning"]');
-          if(await span ==true) {
-            return true;
-          }else if(await span==false){
-            return false;
-          }
-          
-      }
+
       
          
 }

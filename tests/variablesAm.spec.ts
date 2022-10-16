@@ -15,15 +15,15 @@ export class PlaywrightDevPage {
     usuario: "BcaceresZalazar", 
     nombre: "basti",
     apellido: "Caceres",
-    contra: "a1234mMn@#A",
-    confirContra: "a1234mMn@#A"
+    contra: "a1234mMn@#AS",
+    confirContra: "a1234mMn@#AS"
   },
   {
     usuario: "KittyBenvenuto", 
     nombre: "Kitty",
     apellido: "caceres",
-    contra: "a1234mMn@#A",
-    confirContra: "a1234mMn@#A"
+    contra: "a1234mMn@#AS",
+    confirContra: "a1234mMn@#AS"
   },
   {
     usuario: "ReneMoralesBenvenuto", 

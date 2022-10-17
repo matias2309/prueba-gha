@@ -40,9 +40,9 @@ export class PlaywrightDevPage {
     this.apellido =  page.locator('input[name="lastName"]');
     this.clave =  page.locator('text=Password Password is required >> input[name="password"]');
     this.confiClave =  page.locator('input[name="confirmPassword"]');
-    this.guardar =  page.locator('button:has-text("Register")');
-    this.creado =  page.locator('[class="result alert alert-danger"]');
-    
+    this.guardar =  page.locator('//button[@class="btn btn-default"][contains(.,"Register")]');
+    this.creado =  page.locator('');
+    [class="result alert alert-danger"]
   }
   async goto() {
     await this.page.goto('https://buggy.justtestit.org/register');
@@ -89,3 +89,6 @@ export class PlaywrightDevPage {
       
          
 }
+
+
+

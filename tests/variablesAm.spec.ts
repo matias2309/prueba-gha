@@ -9,29 +9,28 @@ export class PlaywrightDevPage {
   readonly clave: Locator;
   readonly confiClave: Locator;
   readonly guardar: Locator;
-  readonly creado: Locator;
   
   readonly clientes = [{
-    usuario: "BcaceresZalazar", 
-    nombre: "basti",
-    apellido: "Caceres",
+    usuario: "Gilgamesh17+", 
+    nombre: "Gilgamesh",
+    apellido: "Sumerio",
     contra: "a1234mMn@#AS",
     confirContra: "a1234mMn@#AS"
-  },
-  {
+  }];
+  /*,{
     usuario: "KittyBenvenuto", 
     nombre: "Kitty",
     apellido: "caceres",
-    contra: "a1234mMn@#A",
-    confirContra: "a1234mMn@#A"
+    contra: "a1234",
+    confirContra: "a1234"
   },
   {
     usuario: "ReneMoralesBenvenuto", 
     nombre: "Rene",
     apellido: "Morales",
-    contra: "a1234mMn@#AS",
-    confirContra: "a1234mMn@#AS",
-  }];
+    contra: "a1234mMnAS",
+    confirContra: "a1234mMnAS",
+  }*/
   
   constructor(page: Page) {
     this.page = page;
@@ -41,8 +40,7 @@ export class PlaywrightDevPage {
     this.clave =  page.locator('text=Password Password is required >> input[name="password"]');
     this.confiClave =  page.locator('input[name="confirmPassword"]');
     this.guardar =  page.locator('//button[@class="btn btn-default"][contains(.,"Register")]');
-    this.creado =  page.locator('');
-    [class="result alert alert-danger"]
+    
   }
   async goto() {
     await this.page.goto('https://buggy.justtestit.org/register');
@@ -50,41 +48,52 @@ export class PlaywrightDevPage {
   async registrar() {
       
         await this.goto();
-        let mensaje:string;
-        for (var x in this.clientes){
-          await this.usuarioT.click();
-          await this.usuarioT.fill(this.clientes[x].usuario);
-          
         
-          await this.nombre.click();
-          await this.nombre.fill(this.clientes[x].nombre);
-              
+        for (var x in this.clientes){
+         
+
+            await this.usuarioT.click();
+            await this.usuarioT.fill(this.clientes[x].usuario);
             
-          await this.apellido.click();
-          await this.apellido.fill(this.clientes[x].apellido);
-              
-            
-          await this.clave.click();
-          await this.clave.fill(this.clientes[x].contra);
-              
-            
-          await this.confiClave.click();
-          await this.confiClave.fill(this.clientes[x].confirContra);
           
-          await this.guardar.click();
-          mensaje=await (await this.creado.innerText()).toString();
-          if(mensaje == 'Registration is successful'){
+            await this.nombre.click();
+            await this.nombre.fill(this.clientes[x].nombre);
+                
+              
+            await this.apellido.click();
+            await this.apellido.fill(this.clientes[x].apellido);
+                
+              
+            await this.clave.click();
+            await this.clave.fill(this.clientes[x].contra);
+                
+              
+            await this.confiClave.click();
+            await this.confiClave.fill(this.clientes[x].confirContra);
+            await this.guardar.click();
+
+            const creado = await this.page.locator('//div[contains(@class,"result alert alert-success")]');
+            await expect(creado).toContainText('Registration is successful');
             await this.page.screenshot({ path: 'Usuario registrado '+this.clientes[x].nombre+'.png'});
-          }else if(mensaje == 'UsernameExistsException: User already exists'){
-            await this.page.screenshot({ path: 'Usuario ya existente '+this.clientes[x].nombre+'.png'});
-          }else if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have symbol characters'){
-            await this.page.screenshot({ path: 'contraseña no cumple con las politica '+this.clientes[x].nombre+'.png'});
-          }else if(mensaje == 'InvalidPasswordException: Password did not conform with policy: Password must have uppercase characters'){
-            await this.page.screenshot({ path: 'contraseña incorrecta '+this.clientes[x].nombre+'.png'});
-          }
+            try{
+            }catch(e){/*
+              let errores= await this.page.locator('//div[contains(@class,"result alert alert-danger")]');
+              if(await errores.innerText() == 'UsernameExistsException: User already exists'){
+                await this.page.screenshot({ path: 'Usuario ya existente '+this.clientes[x].nombre+'.png'});
+              }else if(await errores.innerText() == 'InvalidPasswordException: Password did not conform with policy: Password must have symbol characters'){
+                await this.page.screenshot({ path: 'contraseña no cumple con las politica '+this.clientes[x].nombre+'.png'});
+              }else if(await errores.innerText() == 'InvalidPasswordException: Password did not conform with policy: Password must have uppercase characters'){
+                await this.page.screenshot({ path: 'contraseña incorrecta '+this.clientes[x].nombre+'.png'});
+              }else if(await errores.innerText() == 'InvalidParameter: 1 validation error(s) found. - minimum field size of 6, SignUpInput.Password.'){
+                await this.page.screenshot({ path: 'contraseña incorrecta '+this.clientes[x].nombre+'.png'});
+              }
+          */}finally{
+            
           }
           
         }
+          
+    }
 
       
          

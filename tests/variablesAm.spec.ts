@@ -11,7 +11,7 @@ export class PlaywrightDevPage {
   readonly guardar: Locator;
   
   readonly clientes = [{
-    usuario: "Gilgamesh20+#asxcwe", 
+    usuario: "Gilgamesh20+#asxc", 
     nombre: "Gilgamesh",
     apellido: "Sumerio",
     contra: "a1234mMn@#AS",
@@ -72,7 +72,7 @@ export class PlaywrightDevPage {
             await this.confiClave.fill(this.clientes[x].confirContra);
             await this.guardar.click();
 
-            const creado = await this.page.locator('div > main > my-register > div > div > form > div.result.alert.alert-success');
+            const creado = await this.page.locator('//div[contains(@class,"result alert alert-success")]');
             await expect(creado).toHaveText('Registration is successful');
             await this.page.screenshot({ path: 'Usuario registrado '+this.clientes[x].nombre+'.png'});
             try{

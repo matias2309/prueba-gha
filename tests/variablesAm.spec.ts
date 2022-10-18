@@ -11,13 +11,13 @@ export class PlaywrightDevPage {
   readonly guardar: Locator;
   
   readonly clientes = [{
-    usuario: "Gilgamesh20+#asxc", 
+    usuario: "Gilgamesh20+123", 
     nombre: "Gilgamesh",
     apellido: "Sumerio",
     contra: "a1234mMn@#AS",
     confirContra: "a1234mMn@#AS"
-  }];
-  /*,{
+  },
+  {
     usuario: "KittyBenvenuto", 
     nombre: "Kitty",
     apellido: "caceres",
@@ -30,9 +30,9 @@ export class PlaywrightDevPage {
     apellido: "Morales",
     contra: "a1234mMnAS",
     confirContra: "a1234mMnAS",
-  }*/
-  
-  constructor(page: Page) {
+  }];
+
+   constructor(page: Page) {
     this.page = page;
     this.usuarioT = page.locator('input[name="username"]');
     this.nombre = page.locator('input[name="firstName"]');
@@ -43,6 +43,7 @@ export class PlaywrightDevPage {
     
   }
   async goto() {
+    
     await this.page.goto('https://buggy.justtestit.org/register');
   }
   async registrar() {
@@ -50,8 +51,7 @@ export class PlaywrightDevPage {
         await this.goto();
         
         for (var x in this.clientes){
-         
-
+          try{
             await this.usuarioT.click();
             await this.usuarioT.fill(this.clientes[x].usuario);
             
@@ -71,12 +71,11 @@ export class PlaywrightDevPage {
             await this.confiClave.click();
             await this.confiClave.fill(this.clientes[x].confirContra);
             await this.guardar.click();
-
-            const creado = await this.page.locator('//div[contains(@class,"result alert alert-success")]');
-            await expect(creado).toHaveText('Registration is successful');
+            const creado = await this.page.locator("//div[contains(@class,'result alert alert-success')]");
+            await expect(creado).toContainText('Registration is successful');
             await this.page.screenshot({ path: 'Usuario registrado '+this.clientes[x].nombre+'.png'});
-            try{
-            }catch(e){/*
+           
+          }catch(e){
               let errores= await this.page.locator('//div[contains(@class,"result alert alert-danger")]');
               if(await errores.innerText() == 'UsernameExistsException: User already exists'){
                 await this.page.screenshot({ path: 'Usuario ya existente '+this.clientes[x].nombre+'.png'});
@@ -87,7 +86,7 @@ export class PlaywrightDevPage {
               }else if(await errores.innerText() == 'InvalidParameter: 1 validation error(s) found. - minimum field size of 6, SignUpInput.Password.'){
                 await this.page.screenshot({ path: 'contraseña incorrecta '+this.clientes[x].nombre+'.png'});
               }
-          */}finally{
+           }finally{
             
           }
           

@@ -12,4 +12,4 @@ test('Validar inicio de sesion', async ({ page }) => {
   const iniciar = new iniciarUsuarios(page);
   await iniciar.iniciarSesion(page);
   await iniciar.page.close();
-});
+ });

@@ -9,8 +9,8 @@ test('Validar ingresado Registro', async ({ page }) => {
     await playwrightDev.page.close();
   });
   
-/*test('Validar inicio de sesion', async ({ page }) => {
+test('Validar inicio de sesion', async ({ page }) => {
   const iniciar = new iniciarUsuarios(page);
   await iniciar.iniciarSesion(page);
   await iniciar.page.close();
- });*/
+ });

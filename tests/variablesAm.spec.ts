@@ -12,6 +12,7 @@ export class PlaywrightDevPage {
   
   readonly clientes = [{
     usuario: "Gilgamesh17+", 
+
     nombre: "Gilgamesh",
     apellido: "Sumerio",
     contra: "a1234mMn@#AS",
@@ -71,6 +72,7 @@ export class PlaywrightDevPage {
             await this.confiClave.click();
             await this.confiClave.fill(this.clientes[x].confirContra);
             await this.guardar.click();
+
 
             const creado = await this.page.locator('text=Registration is successful');
             await expect(creado).toContainText('Registration is successful');

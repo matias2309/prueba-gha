@@ -15,13 +15,9 @@ export class iniciarUsuarios{
         this.nombreUsuario = page.locator('//span[contains(@class,"nav-link disabled")]');
         this.cerrar=  page.locator('text=Logout');
       }
-      async goto() {
-        await this.page.goto('https://buggy.justtestit.org/register');
-      }
       async iniciarSesion(page) {
         const variables = new PlaywrightDevPage(page);
-        await this.goto();
-        let nombreDelUsu:Locator;
+        await variables.goto();
         
         for(var i in variables.clientes){
             try {
